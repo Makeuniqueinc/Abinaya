@@ -15,51 +15,57 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden; /* prevent horizontal scroll */
+    padding: 20px;
+    box-sizing: border-box;
   }
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #ff66a3;
     text-shadow: 0 0 10px #ffffffcc;
   }
   .countdown {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     justify-content: center;
     margin-bottom: 2rem;
     position: relative;
     z-index: 1;
+    flex-wrap: wrap;
   }
   .time-box {
     background: #fff0f6;
     border-radius: 12px;
-    padding: 1.5rem 2.5rem;
-    min-width: 90px;
+    padding: 1rem 2rem;
+    min-width: 80px;
     box-shadow: 0 0 15px #ff69b4aa;
+    flex: 1 1 80px;
+    margin-bottom: 10px;
   }
   .time-box .number {
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: #d63384;
   }
   .time-box .label {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 0.3rem;
     color: #ff85a2;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
   .message {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #b30f65;
     min-height: 40px;
     font-weight: 600;
+    padding: 0 10px;
   }
   .birthday-message {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #ff69b4;
     text-shadow: 0 0 15px #ffffff;
@@ -67,12 +73,10 @@
     opacity: 0;
     margin-top: 1rem;
   }
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
   .profile-img {
-    width: 240px;
-    height: 426px;
+    width: 180px;
+    height: auto;
+    max-height: 300px;
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 0 25px #ff69b4;
@@ -86,8 +90,54 @@
     left: 0;
     pointer-events: none;
     z-index: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+    .time-box {
+      min-width: 60px;
+      padding: 1rem 1.5rem;
+    }
+    .time-box .number {
+      font-size: 1.8rem;
+    }
+    .time-box .label {
+      font-size: 0.8rem;
+    }
+    .message {
+      font-size: 1rem;
+    }
+    .birthday-message {
+      font-size: 1.5rem;
+    }
+    .profile-img {
+      width: 140px;
+      max-height: 220px;
+      margin-bottom: 15px;
+    }
+
+    #music-toggle {
+    background-color: #ff66a3;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff66a3aa;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  #music-toggle:hover {
+    background-color: #ff85b2;
+  }
   }
 </style>
+
 </head>
 <body>
 
@@ -116,6 +166,9 @@
     <div class="label">Seconds</div>
   </div>
 </div>
+
+<button id="music-toggle">Pause Music</button>
+
 <div class="message" id="message">Best Friends Forever 💖</div>
 
 <script>
@@ -189,6 +242,20 @@
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  });
+
+  // Music toggle button functionality
+  const music = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+
+  musicToggle.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      musicToggle.textContent = 'Pause Music';
+    } else {
+      music.pause();
+      musicToggle.textContent = 'Play Music';
+    }
   });
 </script>
 
