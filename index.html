@@ -167,7 +167,7 @@
   </div>
 </div>
 
-<button id="music-toggle">Pause Music</button>
+<button id="music-toggle">Play</button>
 
 <div class="message" id="message">Best Friends Forever 💖</div>
 
@@ -251,10 +251,10 @@
   musicToggle.addEventListener('click', () => {
     if (music.paused) {
       music.play();
-      musicToggle.textContent = 'Pause Music';
+      musicToggle.textContent = 'Pause';
     } else {
       music.pause();
-      musicToggle.textContent = 'Play Music';
+      musicToggle.textContent = 'Play';
     }
   });
 </script>
